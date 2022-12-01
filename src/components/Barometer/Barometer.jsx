@@ -4,8 +4,6 @@ import './Barometer.css';
 
 export default function Barometer() {
   return (
-    <section className='barometer'>
-        Barometer
-    </section>
+    <section className='barometer'></section>
   );
 }

@@ -4,6 +4,6 @@ import './ODFlow.css';
 
 export default function ODFlow() {
   return (
-    <section className='odflow'>ODFlow</section>
+    <section className='odflow'></section>
   )
 }

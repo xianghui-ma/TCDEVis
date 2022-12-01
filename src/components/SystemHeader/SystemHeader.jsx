@@ -4,6 +4,8 @@ import './SystemHeader.css';
 
 export default function SystemHeader() {
   return (
-    <section className='systemHeader'>SystemHeader</section>
+    <header className='systemHeader'>
+      <h1>TCDEVis</h1>
+    </header>
   )
 }

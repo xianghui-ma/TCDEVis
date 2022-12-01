@@ -4,6 +4,6 @@ import './ControlPanel.css';
 
 export default function ControlPanel() {
   return (
-    <section className='controlPanel'>ControlPanel</section>
+    <section className='controlPanel'></section>
   );
 }

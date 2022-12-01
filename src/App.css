@@ -1,40 +1,57 @@
-@import url('antd/dist/reset.css');
-
-.App {
-  text-align: center;
+/* 划分页面网格 */
+.app {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-columns: repeat(32, 1fr);
+  grid-template-rows: repeat(32, 1fr);
+	grid-gap: 0.0625em;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* 组件SystemHeader位置 */
+.app .systemHeader{
+  grid-column: 1 / 33;
+  grid-row: 1 / 2;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* 组件ControlPanel位置 */
+.app .controlPanel{
+  grid-column: 1 / 5;
+  grid-row: 2 / 20;
+  background-color: #bbb;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* 组件Map位置 */
+.app .map{
+  grid-column: 5 / 25;
+  grid-row: 2 / 20;
+  background-color: #bbb;
 }
 
-.App-link {
-  color: #61dafb;
+/* 组件TaxiMesScatter位置 */
+.app .taxiMesScatter{
+  grid-column: 25 / 33;
+  grid-row: 2 / 20;
+  background-color: #bbb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* 组件TravelEmissionVary位置 */
+.app .travelEmissionVary{
+  grid-column: 1 / 8;
+  grid-row: 20 / 33;
+  background-color: #bbb;
+}
+
+/* 组件Barometer样式 */
+.app .barometer{
+  grid-column: 8 / 25;
+  grid-row: 20 / 33;
+  background-color: #bbb;
+}
+
+/* 组件ODFlow样式 */
+.app .odflow{
+  grid-column: 25 / 33;
+  grid-row: 20 / 33;
+  background-color: #bbb;
 }

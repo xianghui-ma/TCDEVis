@@ -1,3 +1,5 @@
+
+
 import Barometer from './components/Barometer/Barometer.jsx';
 import ControlPanel from './components/ControlPanel/ControlPanel.jsx';
 import Map from './components/Map/Map.jsx';
@@ -10,7 +12,7 @@ import './App.css';
 
 function App() {
   return (
-    <section className="App">
+    <section className="app">
       <Barometer/>
       <ControlPanel/>
       <Map/>
