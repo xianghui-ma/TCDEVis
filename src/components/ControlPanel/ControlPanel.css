@@ -1,0 +1,25 @@
+.controlPanel{
+    padding: 0em 0.625em 0em 0.625em;
+    text-align: center;
+}
+.controlPanel .travelBox{
+    height: 30%;
+}
+.controlPanel .travelBox .travelList{
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.controlPanel .splitBox{
+    margin-top: 2em;
+    margin-bottom: 2.2em;
+    height: 25%;
+}
+.controlPanel .splitBox .rangeList{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}

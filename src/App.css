@@ -1,3 +1,6 @@
+/* 引入antd样式 */
+@import 'antd/dist/reset.css';
+
 /* 划分页面网格 */
 .app {
   display: grid;
@@ -6,6 +9,7 @@
   grid-template-columns: repeat(32, 1fr);
   grid-template-rows: repeat(32, 1fr);
 	grid-gap: 0.0625em;
+  background-color: #aaa;
 }
 
 /* 组件SystemHeader位置 */
@@ -16,42 +20,42 @@
 
 /* 组件ControlPanel位置 */
 .app .controlPanel{
-  grid-column: 1 / 5;
-  grid-row: 2 / 20;
-  background-color: #bbb;
+  grid-column: 1 / 6;
+  grid-row: 2 / 21;
+  background-color: #fff;
 }
 
 /* 组件Map位置 */
 .app .map{
-  grid-column: 5 / 25;
-  grid-row: 2 / 20;
-  background-color: #bbb;
+  grid-column: 6 / 25;
+  grid-row: 2 / 21;
+  background-color: #fff;
 }
 
 /* 组件TaxiMesScatter位置 */
 .app .taxiMesScatter{
   grid-column: 25 / 33;
-  grid-row: 2 / 20;
-  background-color: #bbb;
+  grid-row: 2 / 21;
+  background-color: #fff;
 }
 
 /* 组件TravelEmissionVary位置 */
 .app .travelEmissionVary{
   grid-column: 1 / 8;
-  grid-row: 20 / 33;
-  background-color: #bbb;
+  grid-row: 21 / 33;
+  background-color: #fff;
 }
 
 /* 组件Barometer样式 */
 .app .barometer{
   grid-column: 8 / 25;
-  grid-row: 20 / 33;
-  background-color: #bbb;
+  grid-row: 21 / 33;
+  background-color: #fff;
 }
 
 /* 组件ODFlow样式 */
 .app .odflow{
   grid-column: 25 / 33;
-  grid-row: 20 / 33;
-  background-color: #bbb;
+  grid-row: 21 / 33;
+  background-color: #fff;
 }
