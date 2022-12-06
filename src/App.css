@@ -41,14 +41,14 @@
 
 /* 组件TravelEmissionVary位置 */
 .app .travelEmissionVary{
-  grid-column: 1 / 8;
+  grid-column: 1 / 7;
   grid-row: 21 / 33;
   background-color: #fff;
 }
 
 /* 组件Barometer样式 */
 .app .barometer{
-  grid-column: 8 / 25;
+  grid-column: 7 / 25;
   grid-row: 21 / 33;
   background-color: #fff;
 }

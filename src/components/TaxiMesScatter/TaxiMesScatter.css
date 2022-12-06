@@ -1,0 +1,13 @@
+.taxiMesScatter{
+    display: flex;
+    flex-direction: column;
+}
+.taxiMesScatter .speedScatter{
+    flex-grow: 1;
+}
+.taxiMesScatter .distanceScatter{
+    flex-grow: 1;
+}
+.taxiMesScatter .timeScatter{
+    flex-grow: 1;
+}
