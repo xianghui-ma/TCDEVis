@@ -8,7 +8,13 @@ export const travelColors = [
     {Service: '#e990ab'},
     {Medical: '#ffd616'},
     {Dining: '#96cbb3'},
-    {Other: '#9f1f5c'},
     {Home: '#85b7e2'},
     {Work: '#ef9020'},
+    {Other: '#9f1f5c'},
 ];
+// 碳排放低、中、高分区配色
+export const emissionRangeColors = {
+    H: '#C1000F',
+    M: '#FFC637',
+    L: '#346FB0'
+};

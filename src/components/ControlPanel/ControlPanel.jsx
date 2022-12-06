@@ -3,7 +3,7 @@ import {Divider, DatePicker, TimePicker, Button, Input} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 
 import {} from './ControlPanel.js';
-import {travelColors} from '../../color.config.js';
+import {travelColors, emissionRangeColors} from '../../color.config.js';
 
 import './ControlPanel.css';
 
@@ -33,18 +33,21 @@ export default function ControlPanel() {
         <Divider style={{color: '#777', borderColor: '#777', margin: '0.5em 0'}}>Filter Emission</Divider>
         <section className='rangeList'>
           {
-            [1, 2, 3].map((id)=>{
+            ['H', 'M', 'L'].map((mark)=>{
               return <Input.Group compact>
                 <Input style={{ width: 100, textAlign: 'center' }} placeholder="Minimum" />
                 <Input
                   className="site-input-split"
                   style={{
-                    width: 30,
+                    width: 40,
                     borderLeft: 0,
                     borderRight: 0,
                     pointerEvents: 'none',
+                    backgroundColor: emissionRangeColors[mark],
+                    color: '#fff',
+                    fontWeight: 800
                   }}
-                  placeholder="——"
+                  placeholder={mark}
                   disabled
                 />
                 <Input
