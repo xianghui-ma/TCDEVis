@@ -7,7 +7,7 @@ import './TaxiMesScatter.css';
 export default function TaxiMesScatter() {
   const flagStore = useRef(false);
   useEffect(()=>{
-    flagStore.current || drawTaxiMesScatterView('http://127.0.0.1:8080/taxiMesAndEmission.json', flagStore, 7);
+    flagStore.current || drawTaxiMesScatterView('http://127.0.0.1:8080/taxiMesAndEmission.json', flagStore, 7, ['speedScatterBox', 'distanceScatterBox', 'timeScatterBox']);
   }, []);
   return (
     <section className='taxiMesScatter'>
