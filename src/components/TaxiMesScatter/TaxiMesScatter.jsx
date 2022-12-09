@@ -1,14 +1,13 @@
-import {React, useEffect} from 'react';
+import {React, useEffect, useRef} from 'react';
 
-import {drawSpeedScatter, drawDistanceScatter, drawTimeScatter} from './TaxiMesScatter.js';
+import {drawTaxiMesScatterView} from './TaxiMesScatter.js';
 
 import './TaxiMesScatter.css';
 
 export default function TaxiMesScatter() {
+  const flagStore = useRef(false);
   useEffect(()=>{
-    drawSpeedScatter('speedScatterBox');
-    drawDistanceScatter('distanceScatterBox');
-    drawTimeScatter('timeScatterBox');
+    flagStore.current || drawTaxiMesScatterView('http://127.0.0.1:8080/taxiMesAndEmission.json', flagStore, 7);
   }, []);
   return (
     <section className='taxiMesScatter'>

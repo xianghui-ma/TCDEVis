@@ -1,13 +1,22 @@
-.taxiMesScatter{
+/* .taxiMesScatter{
     display: flex;
     flex-direction: column;
-}
+} */
 .taxiMesScatter .speedScatter{
-    flex-grow: 1;
+    /* flex-grow: 1;
+    overflow: hidden; */
+    width: 479.25px;
+    height: 185.31px;
 }
 .taxiMesScatter .distanceScatter{
-    flex-grow: 1;
+    /* flex-grow: 1;
+    overflow: hidden; */
+    width: 479.25px;
+    height: 185.31px;
 }
 .taxiMesScatter .timeScatter{
-    flex-grow: 1;
+    /* flex-grow: 1;
+    overflow: hidden; */
+    width: 479.25px;
+    height: 185.31px;
 }
