@@ -20,42 +20,42 @@
 
 /* 组件ControlPanel位置 */
 .app .controlPanel{
-  grid-column: 1 / 6;
-  grid-row: 2 / 21;
+  grid-column: 1 / 4;
+  grid-row: 2 / 33;
   background-color: #fff;
 }
 
 /* 组件Map位置 */
 .app .map{
-  grid-column: 6 / 25;
+  grid-column: 4 / 17;
   grid-row: 2 / 21;
   background-color: #fff;
 }
 
 /* 组件TaxiMesScatter位置 */
 .app .taxiMesScatter{
-  grid-column: 25 / 33;
+  grid-column: 17 / 26;
   grid-row: 2 / 21;
   background-color: #fff;
 }
 
 /* 组件TravelEmissionVary位置 */
 .app .travelEmissionVary{
-  grid-column: 1 / 7;
+  grid-column: 4 / 17;
   grid-row: 21 / 33;
   background-color: #fff;
 }
 
 /* 组件Barometer样式 */
 .app .barometer{
-  grid-column: 7 / 25;
+  grid-column: 17 / 33;
   grid-row: 21 / 33;
   background-color: #fff;
 }
 
 /* 组件ODFlow样式 */
 .app .odflow{
-  grid-column: 25 / 33;
+  grid-column: 4 / 7;
   grid-row: 21 / 33;
   background-color: #fff;
 }

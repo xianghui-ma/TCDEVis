@@ -1,0 +1,31 @@
+.barometer{
+    position: relative;
+}
+.barometer .toggleModel{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.barometer .chartBox{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.barometer .chartBox .speedBox{
+    flex-basis: 31%;
+}
+.barometer .chartBox .distanceBox{
+    flex-basis: 23%;
+}
+.barometer .chartBox .timeBox{
+    flex-basis: 23%;
+}
+.barometer .chartBox .co2Box{
+    flex-basis: 23%;
+}
