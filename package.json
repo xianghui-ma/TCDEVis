@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@bopen/leaflet-area-selection": "^0.7.0",
     "@craco/craco": "^7.0.0",
     "@observablehq/plot": "^0.6.0",
     "@testing-library/jest-dom": "^5.16.5",

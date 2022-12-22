@@ -91,7 +91,10 @@ const drawBar = (data, chart, ifSpeed, title)=>{
         },
         series: [{
             data,
-            type: 'bar'
+            type: 'bar',
+            itemStyle: {
+                color: '#39a6dd'
+            }
         }]
     });
 }

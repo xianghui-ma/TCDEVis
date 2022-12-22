@@ -1,70 +1,70 @@
-import React from 'react';
-import {Divider, DatePicker, TimePicker, Button, Input} from 'antd';
+import {React, useEffect, useRef, useState} from 'react';
+import {Divider, DatePicker, TimePicker, Slider, Select, Switch } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 
-import {} from './ControlPanel.js';
+import {initTravelInControlPanel, handleOdControlInput, initSelectTravelType} from './ControlPanel.js';
 import {travelColors, emissionRangeColors} from '../../color.config.js';
 
 import './ControlPanel.css';
 
 export default function ControlPanel() {
+  // const odHeatmapAccuracyStore = useRef(200);
+  const [heatmapAccuracy, setHeatmapAccuracy] = useState(200);
+  useEffect(()=>{
+    
+  }, []);
   return (
     <section className='controlPanel'>
       <section className='dateBox'>
-        <Divider style={{color: '#777', borderColor: '#777', margin: '0.5em 0'}}>Select Date</Divider>
+        <Divider style={{color: '#777', borderColor: '#777'}}>Select Date</Divider>
         <DatePicker size='middle' style={{width: '100%'}}/>
       </section>
       <section className='hourBox'>
-        <Divider style={{color: '#777', borderColor: '#777', margin: '0.5em 0'}}>Select Time</Divider>
+        <Divider style={{color: '#777', borderColor: '#777'}}>Select Time</Divider>
         <TimePicker.RangePicker format='HH' style={{width: '100%'}}/>
       </section>
+      <section className='odHeatmap'>
+        <Divider style={{color: '#777', borderColor: '#777'}}>OD Heatmap</Divider>
+        <section className='heatmapControl'>
+          <p>Show/Hidden Layer:</p>
+          <Switch checkedChildren="Hidden" unCheckedChildren="Show" defaultChecked style={{ width: '100%', marginTop: '6%', marginBottom: '6%'}}/>
+          <p>Select Travel Type:</p>
+          <Select
+            defaultValue="Traffic"
+            style={{ width: '100%', marginTop: '6%', marginBottom: '6%'}}
+            // onChange={handleChange}
+            options={initSelectTravelType()}
+          />
+          <p>OD Heatmap Accuracy:</p>
+          <Slider max={500} min={50} onChange={setHeatmapAccuracy} step={50} value={heatmapAccuracy} />
+          <p>Display Range:</p>
+          <Slider range defaultValue={[20, 169]} max={169} min={1}/>
+        </section>
+      </section>
+      <section className='settingTraj'>
+        <Divider style={{color: '#777', borderColor: '#777'}}>CO2 Trajectory</Divider>
+        <p>
+          <span className='textDescLow'></span>
+          <span className='textDesc'>100-200</span>
+          <Switch checkedChildren="Hidden" unCheckedChildren="Show" defaultChecked/>
+        </p>
+        <p>
+          <span className='textDescMiddle'></span>
+          <span className='textDesc'>200-300</span>
+          <Switch checkedChildren="Hidden" unCheckedChildren="Show" defaultChecked/>
+        </p>
+        <p>
+          <span className='textDescHigh'></span> 
+          <span className='textDesc'>300-400</span>
+          <Switch checkedChildren="Hidden" unCheckedChildren="Show" defaultChecked/>
+        </p>
+      </section>
       <section className='travelBox'>
-        <Divider style={{color: '#777', borderColor: '#777', margin: '0.5em 0'}}>Select Travel</Divider>
+        <Divider style={{color: '#777', borderColor: '#777'}}>Travel Colors</Divider>
         <section className='travelList'>
-          {
-            travelColors.map((item)=>{
-              return <Button style={{backgroundColor: `${Object.values(item)[0]}`, color: '#fff', fontWeight: 600, borderWidth: 0}}>{Object.keys(item)[0]}</Button>;
-            })
-          }
-          <Button>Selected travel</Button>
+          {initTravelInControlPanel()}
         </section>
       </section>
-      <section className='splitBox'>
-        <Divider style={{color: '#777', borderColor: '#777', margin: '0.5em 0'}}>Filter Emission</Divider>
-        <section className='rangeList'>
-          {
-            ['H', 'M', 'L'].map((mark)=>{
-              return <Input.Group compact>
-                <Input style={{ width: 100, textAlign: 'center' }} placeholder="Minimum" />
-                <Input
-                  className="site-input-split"
-                  style={{
-                    width: 40,
-                    borderLeft: 0,
-                    borderRight: 0,
-                    pointerEvents: 'none',
-                    backgroundColor: emissionRangeColors[mark],
-                    color: '#fff',
-                    fontWeight: 800
-                  }}
-                  placeholder={mark}
-                  disabled
-                />
-                <Input
-                  className="site-input-right"
-                  style={{
-                    width: 100,
-                    textAlign: 'center',
-                  }}
-                  placeholder="Maximum"
-                />
-                <Button type="primary" icon={<SearchOutlined />}/>
-              </Input.Group>
-            })
-          }
-        </section>
-      </section>
-      <section className='apply'><Button type="primary" size='small'>Apply</Button></section>
     </section>
   );
 }

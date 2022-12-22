@@ -9,7 +9,7 @@
   grid-template-columns: repeat(32, 1fr);
   grid-template-rows: repeat(32, 1fr);
 	grid-gap: 0.0625em;
-  background-color: #aaa;
+  background-color: #d1d1d1;
 }
 
 /* 组件SystemHeader位置 */

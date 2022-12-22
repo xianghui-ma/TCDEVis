@@ -2,24 +2,61 @@
     padding: 0em 0.625em 0em 0.625em;
     text-align: center;
 }
-.controlPanel .travelBox{
-    height: 30%;
-}
 .controlPanel .travelBox .travelList{
-    height: 100%;
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
+    font-size: 0.8rem;
+    font-weight: 800;
+    justify-content: space-between;
+    text-align: left;
+}
+.controlPanel .travelBox .travelList p{
+    margin-bottom: 1em;
+}
+.controlPanel .travelBox .travelList .colorMark{
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border-radius: 30%;
+    margin-right: 0.3em;
+}
+.controlPanel .odHeatmap .heatmapControl{
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-align: left;
+}
+.controlPanel .settingTraj p{
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: 1em 0 1em 0;
 }
-.controlPanel .splitBox{
-    margin-top: 2em;
-    margin-bottom: 2.2em;
-    height: 25%;
+.controlPanel .settingTraj .textDescLow,
+.controlPanel .settingTraj .textDescMiddle,
+.controlPanel .settingTraj .textDescHigh{
+    font-size: 0.8rem;
+    font-weight: 800;
 }
-.controlPanel .splitBox .rangeList{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+.controlPanel .settingTraj .textDescLow::before,
+.controlPanel .settingTraj .textDescMiddle::before,
+.controlPanel .settingTraj .textDescHigh::before{
+    content: '';
+    display: inline-block;
+    border-radius: 30%;
+    width: 1em;
+    height: 1em;
+}
+.controlPanel .settingTraj .textDescLow::before{
+    background-color: #A9D18E;
+}
+.controlPanel .settingTraj .textDescMiddle::before{
+    background-color: #548235;
+}
+.controlPanel .settingTraj .textDescHigh::before{
+    background-color: #385723;
+}
+.controlPanel .settingTraj .textDesc{
+    font-size: 0.8rem;
+    font-weight: 800;
 }

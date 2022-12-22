@@ -1,6 +1,7 @@
 import L from 'leaflet';
-import * as turf from '@turf/turf';
 import axios from 'axios';
+import * as d3 from 'd3';
+import { DrawAreaSelection } from '@bopen/leaflet-area-selection';
 
 // 加载地图
 export const loadMap = (containerId, mapStore)=>{
@@ -9,33 +10,30 @@ export const loadMap = (containerId, mapStore)=>{
         attribution: '&copy; <a href="https://www.mapbox.com/">mapbox</>'
     }).addTo(map);
     mapStore.current = map;
-    // drawVoronoi(map);
+    map.addControl(new DrawAreaSelection({
+        position: 'topleft',
+        onPolygonReady: (polygon)=>{
+            console.log(JSON.stringify(polygon.toGeoJSON(3), undefined, 2));
+        },
+        onPolygonDblClick: ()=>{}
+    }));
+    loadHeatmap(map);
 }
 
-const drawVoronoi = async (map)=>{
-    let mask = await axios.get('http://127.0.0.1:8080/南昌市_边界.json');
-    mask = mask.data;
-    let result = {
-        "type": "FeatureCollection",
-        "features": []
-    }
-    var options = {
-        // bbox: [-70, 40, -60, 60]
-        bbox: [115, 28, 116.6, 29.2]
-      };
-    var points = turf.points([[115.85, 28.68],
-        [115.9, 28.68],
-        [115.87, 28.67],
-        [115.92, 28.63],
-        [115.73, 28.72],
-        [115.95, 28.68],
-        [115.93, 28.55],
-        [115.82, 28.7],
-        [115.55, 28.85],
-        [116.27, 28.37]]);
-    var voronoiPolygons = turf.voronoi(points, options);
-    voronoiPolygons.features.forEach((item)=>{
-        result.features.push(turf.intersect(item.geometry, mask.features[0].geometry));
-    })
-    L.geoJSON(result).addTo(map);
+// 加载OD热力图
+const loadHeatmap = async (map)=>{
+    let heatmap = await axios.get('http://localhost:8080/heatmap.json');
+    heatmap = heatmap.data;
+    // 定义颜色比例尺
+    let colorScale = d3.scaleLinear().domain([1, heatmap.max]).range(['#FFFFFF', '#902752']);
+    // 添加热力图层
+    L.geoJSON(heatmap.geo, {
+        style: (feature)=>{
+            return {
+                fillColor : colorScale(feature.properties.count),
+                fillOpacity: 0.8,
+                weight: 0
+            }
+        }
+    }).addTo(map);
 }

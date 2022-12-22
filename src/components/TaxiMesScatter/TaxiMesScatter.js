@@ -1,32 +1,39 @@
 import axios from 'axios';
-import * as Plot from "@observablehq/plot";
+import * as d3 from 'd3';
+import L from 'leaflet';
 
-export const drawTaxiMesScatterView = async (url, flagStore, travelType, boxIdArr)=>{
-    flagStore.current = true;
-    let data = await axios.get(url);
-    data = data.data[travelType];
-    let canvas = null;
-    const xLabel = ['Speed', 'Distance', 'Time'];
-    boxIdArr.forEach((boxId, index)=>{
-        canvas = document.getElementById(boxId);
-        canvas.append(Plot.plot({
-            inset: 15,
-            width: canvas.offsetWidth,
-            height: canvas.offsetHeight,
-            marginLeft: 27,
-            marginBottom: 20,
-            color: {scheme: 'PuRd'},
-            y: {label: 'CO2'},
-            x: {label: xLabel[index]},
-            marks: [
-                Plot.hexagon(
-                    data[index],
-                    Plot.hexbin(
-                        {fill: "count"},
-                        {x: d=>d[0], y: d=>d[1]}
-                    )
-                )
-            ]
-        }));
-    });
+export const drawOdMes = async (store, containerId)=>{
+    // let heatmap = await axios.get('http://localhost:8080/heatmap.json');
+    // heatmap = heatmap.data;
+    // // 定义颜色比例尺
+    // let colorScale = d3.scaleLinear().domain([1, 169]).range(['#FFFFFF', '#8E2752']);
+    // // 添加热力图层
+
+    // store.current = true;
+    // let roadJson = await axios.get('http://127.0.0.1:8080/南昌市.json');
+    // roadJson = roadJson.data;
+    // let containerEle = document.getElementById(containerId);
+    // let canvas = d3.select(`#${containerId}`)
+    //     .append('svg')
+    //     .attr('width', '100%')
+    //     .attr('height', '100%');
+    // // 定义地图投影
+    // console.log(containerEle.offsetWidth / 2, containerEle.offsetHeight / 2);
+    // let projection = d3.geoMercator()
+    //     .center([115.892151, 28.676493])
+    //     .scale(100)
+    //     .translate([containerEle.offsetWidth / 2, containerEle.offsetHeight / 2]);
+    // // 定义地理路径生成器
+    // let path = d3.geoPath()
+    //     .projection(projection);
+    // // 绘制地图
+    // canvas.append('g')
+    //     .selectAll('path')
+    //     .data(roadJson.features)
+    //     .enter()
+    //     .append('path')
+    //     // .attr('stroke', '#aaa')
+    //     // .attr('stroke-width', '1px')
+    //     // .style('fill', '#fff')
+    //     .attr('d', path);
 }
