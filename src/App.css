@@ -32,8 +32,8 @@
   background-color: #fff;
 }
 
-/* 组件TaxiMesScatter位置 */
-.app .taxiMesScatter{
+/* 组件ODCluster位置 */
+.app .odCluster{
   grid-column: 17 / 26;
   grid-row: 2 / 21;
   background-color: #fff;
@@ -53,9 +53,9 @@
   background-color: #fff;
 }
 
-/* 组件ODFlow样式 */
-.app .odflow{
-  grid-column: 4 / 7;
-  grid-row: 21 / 33;
+/* 组件RoadRank样式 */
+.app .roadRank{
+  grid-column: 26 / 33;
+  grid-row: 2 / 21;
   background-color: #fff;
 }
