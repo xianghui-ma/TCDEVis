@@ -1,0 +1,12 @@
+.odmes{
+    display: flex;
+    flex-direction: column;
+}
+.odmes .parallel{
+    flex-basis: 60%;
+    overflow: hidden;
+}
+.odmes .bar{
+    flex-basis: 40%;
+    overflow: hidden;
+}

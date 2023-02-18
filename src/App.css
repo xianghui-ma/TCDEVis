@@ -32,13 +32,6 @@
   background-color: #fff;
 }
 
-/* 组件ODCluster位置 */
-.app .odCluster{
-  grid-column: 17 / 26;
-  grid-row: 2 / 21;
-  background-color: #fff;
-}
-
 /* 组件TravelEmissionVary位置 */
 .app .travelEmissionVary{
   grid-column: 4 / 17;
@@ -53,9 +46,8 @@
   background-color: #fff;
 }
 
-/* 组件RoadRank样式 */
-.app .roadRank{
-  grid-column: 26 / 33;
+.app .odmes{
+  grid-column: 17 / 33;
   grid-row: 2 / 21;
   background-color: #fff;
 }

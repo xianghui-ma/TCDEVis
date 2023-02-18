@@ -1,8 +1,7 @@
 import Barometer from './components/Barometer/Barometer.jsx';
 import ControlPanel from './components/ControlPanel/ControlPanel.jsx';
 import Map from './components/Map/Map.jsx';
-import RoadRank from './components/RoadRank/RoadRank.jsx';
-import ODCluster from './components/ODCluster/ODCluster.jsx';
+import ODMes from './components/ODMes/ODMes.jsx';
 import TravelEmissionVary from './components/TravelEmissionVary/TravelEmissionVary.jsx';
 import SystemHeader from './components/SystemHeader/SystemHeader.jsx';
 
@@ -14,8 +13,7 @@ function App() {
       <Barometer/>
       <ControlPanel/>
       <Map/>
-      <RoadRank/>
-      <ODCluster/>
+      <ODMes/>
       <TravelEmissionVary/>
       <SystemHeader/>
     </section>
