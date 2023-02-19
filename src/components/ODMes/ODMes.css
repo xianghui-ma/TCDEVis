@@ -2,11 +2,11 @@
     display: flex;
     flex-direction: column;
 }
-.odmes .parallel{
+.odmes .pathCluster{
     flex-basis: 60%;
     overflow: hidden;
 }
-.odmes .bar{
+.odmes .mesTable{
     flex-basis: 40%;
     overflow: hidden;
 }

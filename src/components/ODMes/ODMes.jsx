@@ -1,19 +1,20 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 
-import {drawParallel, drawBar} from './ODMes.js';
+import {drawClusterGraph} from './ODMes.js';
 
 import './ODMes.css';
 
 export default function ODMes() {
+    const canvasStore = useRef(null);
+
     useEffect(()=>{
-        drawParallel('parallelBox');
-        drawBar('barBox');
+        canvasStore.current || drawClusterGraph('clusterBox', canvasStore);
     }, []);
   
     return (
     <section className='odmes'>
-        <section className='parallel' id='parallelBox'></section>
-        <section className='bar' id='barBox'></section>
+        <section className='pathCluster' id='clusterBox'></section>
+        <section className='mesTable' id='tabelBox'></section>
     </section>
   );
 }
