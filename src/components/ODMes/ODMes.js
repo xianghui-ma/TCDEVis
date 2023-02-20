@@ -1,8 +1,32 @@
 import * as d3 from 'd3';
 
-// 绘制图标中的变量
-const drawVaryIcon = ()=>{
+// **********绘制图标中的变量**********
+// 绘制编码出行目的的小圆
+const drawVaryCircle = (g, width)=>{
+  // mock各出行目的数量
+  let travel = [11,8,45,21,2,34,79,50,25,0];
+  // 定义小圆的尺寸比例尺
+  let sizeScale = d3.scaleLinear().domain([0, d3.max(travel)]).range([1, 9]);
+  // 绘制小圆
+  let travelG = g.append('g');
+  travel.forEach((item, index)=>{
+    travelG.append('g')
+      .attr('transform', `rotate(${-130 + index * 18}) translate(0, ${width / 2 - 40})`)
+      .append('circle')
+      .attr('r', ()=>{
+        return sizeScale(item);
+      })
+      .attr('fill', '#39a6dd');
+  });
+}
 
+// 绘制速度指针三角形
+const drawTriangle = (g, width)=>{
+  let triangleG = g.append('g');
+  triangleG.append('polygon')
+    .attr('points', `-10,20 10,20 0,${width / 2 - 80}`)
+    .attr('transform', `rotate(${-120})`)
+    .attr('fill', '#39a6dd');
 }
 
 // 绘制固定图标
@@ -102,6 +126,10 @@ const drawIcon = (g, width, clusterIndex)=>{
     .attr('stroke', '#39a6dd')
     .attr('stroke-width', '2px')
     .attr("fill", "none");
+
+  // 绘制图标中的变量
+  drawVaryCircle(g, width);
+  drawTriangle(g, width);
 }
 
 export const drawClusterGraph = (containerId, store)=>{
