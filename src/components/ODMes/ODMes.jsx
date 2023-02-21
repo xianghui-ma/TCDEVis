@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 
-import {drawClusterGraph} from './ODMes.js';
+import {drawClusterGraph, drawTable} from './ODMes.js';
 
 import './ODMes.css';
 
@@ -10,11 +10,11 @@ export default function ODMes() {
     useEffect(()=>{
         canvasStore.current || drawClusterGraph('clusterBox', canvasStore);
     }, []);
-  
+    
     return (
     <section className='odmes'>
         <section className='pathCluster' id='clusterBox'></section>
-        <section className='mesTable' id='tabelBox'></section>
+        <section className='mesTable' id='tabelBox'>{drawTable()}</section>
     </section>
   );
 }

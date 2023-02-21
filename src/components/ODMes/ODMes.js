@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import { Table } from 'antd';
 
 // **********绘制图标中的变量**********
 // 绘制编码出行目的的小圆
@@ -21,11 +22,17 @@ const drawVaryCircle = (g, width)=>{
 }
 
 // 绘制速度指针三角形
-const drawTriangle = (g, width)=>{
+const drawTriangle = (g, clusterIndex, width)=>{
+  // mock数据
+  let cluster_data = {0: {'speed_mean': 26.506147994187383, 'time_mean': 21.094827586206897, 'distance_mean': 10165.103448275862, 'co2_mean': 4.339365962266263}, 1: {'speed_mean': 24.204628064226846, 'time_mean': 31.73913043478261, 'distance_mean': 14436.449275362318, 'co2_mean': 6.143573295744254}, 2: {'speed_mean': 26.265488137494962, 'time_mean': 28.68421052631579, 'distance_mean': 21581.0, 'co2_mean': 8.805922803174237}};
+  let max_data = {'average_speed_max': 56.0204081632653, 'time_span_max': 58.0, 'distance_max': 34136, 'co2_max': 17.2100851677064};
+  // 定义指针比例尺
+  let speedScale = d3.scaleLinear().domain([0, max_data.average_speed_max]).range([60, 300]);
+  // 开始绘制指针
   let triangleG = g.append('g');
   triangleG.append('polygon')
     .attr('points', `-10,20 10,20 0,${width / 2 - 80}`)
-    .attr('transform', `rotate(${0})`)
+    .attr('transform', `rotate(${speedScale(cluster_data[clusterIndex].speed_mean)})`)
     .attr('fill', '#39a6dd');
 }
 
@@ -84,8 +91,12 @@ const co2Arc = (g, width, clusterIndex)=>{
 
 // **********绘制固定图标**********
 const drawIcon = (g, width, clusterIndex)=>{
+  // mock数据
+  let cluster_data = {0: {'speed_mean': 26.506147994187383, 'time_mean': 21.094827586206897, 'distance_mean': 10165.103448275862, 'co2_mean': 4.339365962266263}, 1: {'speed_mean': 24.204628064226846, 'time_mean': 31.73913043478261, 'distance_mean': 14436.449275362318, 'co2_mean': 6.143573295744254}, 2: {'speed_mean': 26.265488137494962, 'time_mean': 28.68421052631579, 'distance_mean': 21581.0, 'co2_mean': 8.805922803174237}};
+  let max_data = {'average_speed_max': 56.0204081632653, 'time_span_max': 58.0, 'distance_max': 34136, 'co2_max': 17.2100851677064};
+
   let colorScale = d3.scaleLinear()
-    .domain([0, 120])
+    .domain([0, max_data.average_speed_max])
     .range(['#D3D4D5', '#39a6dd']);
 
   // 绘制中心实心小圆
@@ -147,14 +158,14 @@ const drawIcon = (g, width, clusterIndex)=>{
     );
   }
   g.append('g').selectAll('path')
-        .data(arcPathArr)
-        .join('path')
-        .attr('d', (d)=>{
-            return d();
-        })
-        .attr('fill', (_, i)=>{
-          return(colorScale((i + 1) * 10))
-        });
+    .data(arcPathArr)
+    .join('path')
+    .attr('d', (d)=>{
+        return d();
+    })
+    .attr('fill', (_, i)=>{
+      return(colorScale((max_data.average_speed_max / 12) * i))
+    });
   // 绘制速度说明文字
   g.append('g')
     .append('text')
@@ -182,7 +193,7 @@ const drawIcon = (g, width, clusterIndex)=>{
 
   // 绘制图标中的变量
   drawVaryCircle(g, width);
-  drawTriangle(g, width);
+  drawTriangle(g, clusterIndex, width);
   distanceAndTimespan(g, clusterIndex, width);
   co2Arc(g, width, clusterIndex);
 }
@@ -214,4 +225,94 @@ export const drawClusterGraph = (containerId, store)=>{
   });
 
   store.current = canvas;
+}
+
+// **********绘制表格**********
+export const drawTable = ()=>{
+  // mock数据
+  let data = [
+    {
+      key: '1',
+      speed: 27.265625,
+      time: 18.0,
+      distance: 9870,
+      co2: 3.90752727880241,
+      purpose: 3,
+      trajectory: '#1'
+    },
+    {
+      key: '2',
+      speed: 36.3512820512821,
+      time: 24.0,
+      distance: 15714,
+      co2: 3.87490603190572,
+      purpose: 10,
+      trajectory: '#2'
+    },
+    {
+      key: '3',
+      speed: 25.7302325581395,
+      time: 24.0,
+      distance: 11244,
+      co2: 4.46311831500317,
+      purpose: 7,
+      trajectory: '#3'
+    },
+    {
+      key: '4',
+      speed: 28.4048780487805,
+      time: 21.0,
+      distance: 11395,
+      co2: 4.47910644131827,
+      purpose: 9,
+      trajectory: '#4'
+    }
+  ];
+  let columns = [
+    {
+      title: 'Trajectory ID',
+      dataIndex: 'trajectory'
+    },
+    {
+      title: 'Trip Purposes',
+      dataIndex: 'purpose'
+    },
+    {
+      title: 'Average Speed',
+      dataIndex: 'speed',
+      sorter: {
+        compare: (a, b) => a.speed - b.speed,
+      }
+    },
+    {
+      title: 'Trip Time',
+      dataIndex: 'time',
+      sorter: {
+        compare: (a, b) => a.time - b.time,
+      },
+    },
+    {
+      title: 'Distance',
+      dataIndex: 'distance',
+      sorter: {
+        compare: (a, b) => a.distance - b.distance,
+      },
+    },
+    {
+      title: 'CO2',
+      dataIndex: 'co2',
+      sorter: {
+        compare: (a, b) => a.co2 - b.co2,
+      },
+    }
+  ];
+  let onChange = (pagination, filters, sorter, extra) => {
+    console.log('params', pagination, filters, sorter, extra);
+  };
+  return <Table columns={columns} dataSource={data} onChange={onChange} pagination={{hideOnSinglePage: true}} rowSelection={{
+    type: 'checkbox',
+    onChange: (selectedRowKeys, selectedRows) => {
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    }
+  }}/>;
 }

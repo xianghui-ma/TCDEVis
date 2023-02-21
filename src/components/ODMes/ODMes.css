@@ -8,5 +8,6 @@
 }
 .odmes .mesTable{
     flex-basis: 40%;
-    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
