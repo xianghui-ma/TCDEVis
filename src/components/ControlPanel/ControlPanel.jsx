@@ -1,8 +1,9 @@
 import {React, useEffect, useRef, useState} from 'react';
 import {Divider, DatePicker, TimePicker, Slider, Select, Switch } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
+import pubsub from 'pubsub-js';
 
-import {initTravelInControlPanel, handleOdControlInput, initSelectTravelType} from './ControlPanel.js';
+import {initTravelInControlPanel, handleOdControlInput, initSelectTravelType, isShowOdLayer, getMapAndLayers} from './ControlPanel.js';
 import {travelColors, emissionRangeColors} from '../../color.config.js';
 
 import './ControlPanel.css';
@@ -11,7 +12,7 @@ export default function ControlPanel() {
   // const odHeatmapAccuracyStore = useRef(200);
   const [heatmapAccuracy, setHeatmapAccuracy] = useState(200);
   useEffect(()=>{
-    
+    pubsub.subscribe('outputLayers', getMapAndLayers);
   }, []);
   return (
     <section className='controlPanel'>
@@ -27,7 +28,7 @@ export default function ControlPanel() {
         <Divider style={{color: '#777', borderColor: '#777'}}>OD Heatmap</Divider>
         <section className='heatmapControl'>
           <p>Show/Hidden Layer:</p>
-          <Switch checkedChildren="Hidden" unCheckedChildren="Show" defaultChecked style={{ width: '100%', marginTop: '6%', marginBottom: '6%'}}/>
+          <Switch checkedChildren="Hidden" unCheckedChildren="Show" defaultChecked style={{ width: '100%', marginTop: '6%', marginBottom: '6%'}} onChange={isShowOdLayer}/>
           <p>Select Travel Type:</p>
           <Select
             defaultValue="Traffic"

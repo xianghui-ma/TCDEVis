@@ -2,6 +2,52 @@ import L from 'leaflet';
 import axios from 'axios';
 import * as d3 from 'd3';
 import { DrawAreaSelection } from '@bopen/leaflet-area-selection';
+import pubsub from 'pubsub-js';
+
+let selectedAreaArray = [];
+
+// 清除选取图层
+const clearSelectedAreaLayer = (map)=>{
+    selectedAreaArray.forEach((item)=>{
+        map.removeLayer(item);
+    });
+    selectedAreaArray = [];
+}
+
+// 添加所选区域
+const addSelectedArea = (map, selectedArea)=>{
+    selectedAreaArray.push(
+        L.geoJSON(selectedArea, {
+            style: {
+                weight: 0
+            }
+        }).addTo(map)
+    );
+}
+
+// 添加清除按钮
+const addClearButton = (map)=>{
+    L.Control.ClearButton = L.Control.extend({
+        onAdd: ()=>{
+            let clearButton = L.DomUtil.create('img');
+            clearButton.src = './clear.png';
+            clearButton.style.width = '32px';
+            clearButton.style.height = '32px';
+            clearButton.style.borderRadius = '10%';
+            clearButton.style.border = '1px solid #ccc';
+            clearButton.style.backgroundColor = '#fff';
+            clearButton.style.cursor = 'pointer';
+            L.DomEvent.on(clearButton, 'click', ()=>{
+                clearSelectedAreaLayer(map);
+            });
+            return clearButton;
+        }
+    });
+    L.control.clearButton = (opts)=>{
+        return new L.Control.ClearButton(opts);
+    }
+    L.control.clearButton({ position: 'topleft' }).addTo(map);
+}
 
 // 加载地图
 export const loadMap = (containerId, mapStore)=>{
@@ -10,14 +56,20 @@ export const loadMap = (containerId, mapStore)=>{
         attribution: '&copy; <a href="https://www.mapbox.com/">mapbox</>'
     }).addTo(map);
     mapStore.current = map;
+    let selectedArea = null;
     map.addControl(new DrawAreaSelection({
         position: 'topleft',
         onPolygonReady: (polygon)=>{
-            console.log(JSON.stringify(polygon.toGeoJSON(3), undefined, 2));
+            selectedArea = polygon.toGeoJSON(3);
+            // selectedArea = JSON.stringify(polygon.toGeoJSON(3), undefined, 2);
         },
-        onPolygonDblClick: ()=>{}
+        onButtonDeactivate: ()=>{
+            addSelectedArea(map, selectedArea);
+        }
     }));
+    addClearButton(map);
     loadHeatmap(map);
+    pubsub.publish('outputLayers', {map});
 }
 
 // 加载OD热力图
@@ -27,7 +79,7 @@ const loadHeatmap = async (map)=>{
     // 定义颜色比例尺
     let colorScale = d3.scaleLinear().domain([1, heatmap.max]).range(['#FFFFFF', '#902752']);
     // 添加热力图层
-    L.geoJSON(heatmap.geo, {
+    let odHeatmapLayer = L.geoJSON(heatmap.geo, {
         style: (feature)=>{
             return {
                 fillColor : colorScale(feature.properties.count),
@@ -36,4 +88,5 @@ const loadHeatmap = async (map)=>{
             }
         }
     }).addTo(map);
+    pubsub.publish('outputLayers', {odHeatmapLayer});
 }

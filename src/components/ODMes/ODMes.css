@@ -1,13 +1,14 @@
 .odmes{
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
+    flex-direction: row;
 }
 .odmes .pathCluster{
-    flex-basis: 60%;
+    flex-basis: 50%;
     overflow: hidden;
 }
 .odmes .mesTable{
-    flex-basis: 40%;
+    flex-basis: 50%;
     overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-x: scroll;
 }

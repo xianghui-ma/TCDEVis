@@ -1,3 +1,20 @@
+// 存放地图图层信息
+const layersMes = {
+    map: null,
+    odHeatmapLayer: null
+}
+
+// 获取地图实例和图层信息
+export const getMapAndLayers = (_, mes)=>{
+    Object.assign(layersMes, mes);
+}
+
+// 显示/隐藏OD图层
+export const isShowOdLayer = (checked)=>{
+    checked ? layersMes.map.addLayer(layersMes.odHeatmapLayer) : layersMes.map.removeLayer(layersMes.odHeatmapLayer);
+}
+
+// 初始化控制面板
 export const initTravelInControlPanel = ()=>{
     const leftCol = ['Traffic', 'Dining', 'Pastime', 'Hotel', 'Work', 'Other'];
     const rightCol = ['Shop', 'Service', 'Medical', 'Home', 'School'];

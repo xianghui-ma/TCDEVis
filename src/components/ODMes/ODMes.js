@@ -266,16 +266,70 @@ export const drawTable = ()=>{
       co2: 4.47910644131827,
       purpose: 9,
       trajectory: '#4'
+    },
+    {
+      key: '5',
+      speed: 27.265625,
+      time: 18.0,
+      distance: 9870,
+      co2: 3.90752727880241,
+      purpose: 3,
+      trajectory: '#5'
+    },
+    {
+      key: '6',
+      speed: 36.3512820512821,
+      time: 24.0,
+      distance: 15714,
+      co2: 3.87490603190572,
+      purpose: 10,
+      trajectory: '#6'
+    },
+    {
+      key: '7',
+      speed: 25.7302325581395,
+      time: 24.0,
+      distance: 11244,
+      co2: 4.46311831500317,
+      purpose: 7,
+      trajectory: '#7'
+    },
+    {
+      key: '8',
+      speed: 28.4048780487805,
+      time: 21.0,
+      distance: 11395,
+      co2: 4.47910644131827,
+      purpose: 9,
+      trajectory: '#8'
+    },
+    {
+      key: '9',
+      speed: 25.7302325581395,
+      time: 24.0,
+      distance: 11244,
+      co2: 4.46311831500317,
+      purpose: 7,
+      trajectory: '#9'
+    },
+    {
+      key: '10',
+      speed: 28.4048780487805,
+      time: 21.0,
+      distance: 11395,
+      co2: 4.47910644131827,
+      purpose: 9,
+      trajectory: '#10'
     }
   ];
   let columns = [
     {
       title: 'Trajectory ID',
-      dataIndex: 'trajectory'
+      dataIndex: 'trajectory',
     },
     {
       title: 'Trip Purposes',
-      dataIndex: 'purpose'
+      dataIndex: 'purpose',
     },
     {
       title: 'Average Speed',

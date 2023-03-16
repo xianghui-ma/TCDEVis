@@ -82,7 +82,7 @@ const drawFrequencyOfTravel = (width, g, data)=>{
     let axisMark = null;
     AXISMARKARR.forEach((item)=>{
         axisMark = axisG.append('g')
-            .attr('transform', `rotate(${-90 + item * 15}) translate(${INNERRADIUS}, 0)`); 
+            .attr('transform', `rotate(${-90 + item * 15}) translate(${INNERRADIUS}, 0)`);
         axisMark.append('line')
             .attr('x2', -5)
             .attr('stroke', '#000')
