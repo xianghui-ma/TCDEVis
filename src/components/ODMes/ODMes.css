@@ -1,11 +1,18 @@
 .odmes{
     display: flex;
-    /* flex-direction: column; */
     flex-direction: row;
 }
 .odmes .pathCluster{
     flex-basis: 50%;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.odmes .pathCluster .scatter{
+    flex-basis: 70%;
+}
+.odmes .pathCluster .bar{
+    flex-basis: 30%;
 }
 .odmes .mesTable{
     flex-basis: 50%;

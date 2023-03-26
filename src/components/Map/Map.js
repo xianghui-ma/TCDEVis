@@ -5,6 +5,7 @@ import { DrawAreaSelection } from '@bopen/leaflet-area-selection';
 import pubsub from 'pubsub-js';
 
 let selectedAreaArray = [];
+let selectedAreaJson = [];
 
 // 清除选取图层
 const clearSelectedAreaLayer = (map)=>{
@@ -12,10 +13,12 @@ const clearSelectedAreaLayer = (map)=>{
         map.removeLayer(item);
     });
     selectedAreaArray = [];
+    selectedAreaJson = [];
 }
 
 // 添加所选区域
 const addSelectedArea = (map, selectedArea)=>{
+    selectedAreaJson.push(selectedArea.geometry.coordinates[0]);
     selectedAreaArray.push(
         L.geoJSON(selectedArea, {
             style: {
@@ -49,6 +52,40 @@ const addClearButton = (map)=>{
     L.control.clearButton({ position: 'topleft' }).addTo(map);
 }
 
+// 添加查询按钮
+const addSearchButton = (map)=>{
+    L.Control.SearchButton = L.Control.extend({
+        onAdd: ()=>{
+            let searchButton = L.DomUtil.create('img');
+            searchButton.src = './search.png';
+            searchButton.style.width = '32px';
+            searchButton.style.height = '32px';
+            searchButton.style.borderRadius = '10%';
+            searchButton.style.border = '1px solid #ccc';
+            searchButton.style.backgroundColor = '#fff';
+            searchButton.style.cursor = 'pointer';
+            L.DomEvent.on(searchButton, 'click', ()=>{
+                console.log(selectedAreaJson);
+                axios({
+                    method: 'post',
+                    url: 'http://localhost:5000/odPathSearch',
+                    data: {
+                        startArea: selectedAreaJson[0],
+                        endArea: selectedAreaJson[1]
+                    }
+                }).then((response)=>{
+                    console.log(response);
+                });
+            });
+            return searchButton;
+        }
+    });
+    L.control.searchButton = (opts)=>{
+        return new L.Control.SearchButton(opts);
+    }
+    L.control.searchButton({ position: 'topleft' }).addTo(map);
+}
+
 // 加载地图
 export const loadMap = (containerId, mapStore)=>{
     let map = L.map(containerId).setView([28.676493, 115.892151], 13);
@@ -68,6 +105,7 @@ export const loadMap = (containerId, mapStore)=>{
         }
     }));
     addClearButton(map);
+    addSearchButton(map);
     loadHeatmap(map);
     pubsub.publish('outputLayers', {map});
 }
