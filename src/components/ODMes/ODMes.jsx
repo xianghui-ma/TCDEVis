@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from 'react';
+import pubsub from 'pubsub-js';
 
-import {drawClusterGraph, drawTable} from './ODMes.js';
+import { drawScatter, drawTable } from './ODMes.js';
 
 import './ODMes.css';
 
@@ -8,13 +9,15 @@ export default function ODMes() {
     const canvasStore = useRef(null);
 
     useEffect(()=>{
-        // canvasStore.current || drawClusterGraph('clusterBox', canvasStore);
+        pubsub.subscribe('odMes', (_, data)=>{
+            canvasStore.current || drawScatter('scatterBox', canvasStore, data);
+        })
     }, []);
     
     return (
     <section className='odmes'>
         <section className='pathCluster' id='clusterBox'>
-            <section className='scatter'></section>
+            <section className='scatter' id='scatterBox'></section>
             <section className='bar'></section>
         </section>
         <section className='mesTable' id='tabelBox'>{drawTable()}</section>

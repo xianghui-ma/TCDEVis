@@ -74,7 +74,7 @@ const addSearchButton = (map)=>{
                         endArea: selectedAreaJson[1]
                     }
                 }).then((response)=>{
-                    console.log(response);
+                    pubsub.publish('odMes', response.data);
                 });
             });
             return searchButton;
