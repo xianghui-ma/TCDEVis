@@ -65,7 +65,6 @@ const addSearchButton = (map)=>{
             searchButton.style.backgroundColor = '#fff';
             searchButton.style.cursor = 'pointer';
             L.DomEvent.on(searchButton, 'click', ()=>{
-                console.log(selectedAreaJson);
                 axios({
                     method: 'post',
                     url: 'http://localhost:5000/odPathSearch',

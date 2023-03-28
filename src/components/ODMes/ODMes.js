@@ -2,6 +2,21 @@ import * as d3 from 'd3';
 import { Table } from 'antd';
 import * as echarts from 'echarts';
 
+// 颜色配置
+const colors = {
+  Traffic: '#a6cee3',
+  Hotel: '#1f78b4',
+  Pastime: '#b2df8a',
+  School: '#33a02c',
+  Shop: '#fb9a99',
+  Service: '#e31a1c',
+  Medical: '#fdbf6f',
+  Dining: '#ff7f00',
+  Home: '#cab2d6',
+  Work: '#6a3d9a',
+  Other: '#b15928',
+}
+
 // // **********绘制图标中的变量**********
 // // 绘制编码出行目的的小圆
 // const drawVaryCircle = (g, width)=>{
@@ -230,20 +245,6 @@ import * as echarts from 'echarts';
 
 // 绘制散点图
 export const drawScatter = (containerId, store, odData)=>{
-  // 颜色配置
-  const colors = {
-      Traffic: '#a6cee3',
-      Hotel: '#1f78b4',
-      Pastime: '#b2df8a',
-      School: '#33a02c',
-      Shop: '#fb9a99',
-      Service: '#e31a1c',
-      Medical: '#fdbf6f',
-      Dining: '#ff7f00',
-      Home: '#cab2d6',
-      Work: '#6a3d9a',
-      Other: '#b15928',
-  }
   // 创建series和legend
   let series = [];
   let legendData = [];
@@ -304,106 +305,25 @@ export const drawScatter = (containerId, store, odData)=>{
     },
     brush: {},
     series
-  });
+  }, true);
   store.current = chart;
 }
 
 
 // **********绘制表格**********
-export const drawTable = ()=>{
+export const drawTable = (data)=>{
   // mock数据
-  let data = [
-    {
-      key: '1',
-      speed: 27.265625,
-      time: 18.0,
-      distance: 9870,
-      co2: 3.90752727880241,
-      purpose: 3,
-      trajectory: '#1'
-    },
-    {
-      key: '2',
-      speed: 36.3512820512821,
-      time: 24.0,
-      distance: 15714,
-      co2: 3.87490603190572,
-      purpose: 10,
-      trajectory: '#2'
-    },
-    {
-      key: '3',
-      speed: 25.7302325581395,
-      time: 24.0,
-      distance: 11244,
-      co2: 4.46311831500317,
-      purpose: 7,
-      trajectory: '#3'
-    },
-    {
-      key: '4',
-      speed: 28.4048780487805,
-      time: 21.0,
-      distance: 11395,
-      co2: 4.47910644131827,
-      purpose: 9,
-      trajectory: '#4'
-    },
-    {
-      key: '5',
-      speed: 27.265625,
-      time: 18.0,
-      distance: 9870,
-      co2: 3.90752727880241,
-      purpose: 3,
-      trajectory: '#5'
-    },
-    {
-      key: '6',
-      speed: 36.3512820512821,
-      time: 24.0,
-      distance: 15714,
-      co2: 3.87490603190572,
-      purpose: 10,
-      trajectory: '#6'
-    },
-    {
-      key: '7',
-      speed: 25.7302325581395,
-      time: 24.0,
-      distance: 11244,
-      co2: 4.46311831500317,
-      purpose: 7,
-      trajectory: '#7'
-    },
-    {
-      key: '8',
-      speed: 28.4048780487805,
-      time: 21.0,
-      distance: 11395,
-      co2: 4.47910644131827,
-      purpose: 9,
-      trajectory: '#8'
-    },
-    {
-      key: '9',
-      speed: 25.7302325581395,
-      time: 24.0,
-      distance: 11244,
-      co2: 4.46311831500317,
-      purpose: 7,
-      trajectory: '#9'
-    },
-    {
-      key: '10',
-      speed: 28.4048780487805,
-      time: 21.0,
-      distance: 11395,
-      co2: 4.47910644131827,
-      purpose: 9,
-      trajectory: '#10'
-    }
-  ];
+  // let data = [
+  //   {
+  //     key: '1',
+  //     speed: 27.265625,
+  //     time: 18.0,
+  //     distance: 9870,
+  //     co2: 3.90752727880241,
+  //     purpose: 3,
+  //     trajectory: '#1'
+  //   }
+  // ];
   let columns = [
     {
       title: 'Trajectory ID',
@@ -451,4 +371,46 @@ export const drawTable = ()=>{
       console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
     }
   }}/>;
+}
+
+// 绘制条形统计图
+export const drawBarStatics = (containerId, store, barData)=>{
+  let chart = echarts.init(document.getElementById(containerId));
+  store.current = chart;
+  let data = []
+  for(let key in barData){
+    data.push({
+      value: barData[key],
+      itemStyle: {
+        color: colors[key]
+      }
+    });
+  }
+  chart.setOption({
+    grid: {
+      left: 0,
+      right: 0,
+      top: 60,
+      bottom: 0
+    },
+    xAxis: {
+      type: 'category',
+      show: false
+    },
+    yAxis: {
+      type: 'value',
+      show: false
+    },
+    series: [
+      {
+        data,
+        type: 'bar'
+      }
+    ]
+  });
+}
+
+// 绘制日期频率
+export const drawTimeFrequency = (containerId)=>{
+  
 }
