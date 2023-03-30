@@ -1,6 +1,9 @@
 import * as d3 from 'd3';
 import { Table } from 'antd';
 import * as echarts from 'echarts';
+import L from 'leaflet';
+
+let pathLayers = null;
 
 // 颜色配置
 const colors = {
@@ -84,7 +87,7 @@ export const drawScatter = (containerId, odData)=>{
 
 
 // **********绘制表格**********
-export const drawTable = (data)=>{
+export const drawTable = (data, mapStore)=>{
   // mock数据
   // let data = [
   //   {
@@ -141,7 +144,18 @@ export const drawTable = (data)=>{
   return <Table columns={columns} dataSource={data} onChange={onChange} pagination={{hideOnSinglePage: true}} rowSelection={{
     type: 'checkbox',
     onChange: (selectedRowKeys, selectedRows) => {
-      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+      let path = []
+      pathLayers && mapStore.current.removeLayer(pathLayers);
+      selectedRows.forEach((item)=>{
+        path.push(JSON.parse(item['traj']));
+      });
+      pathLayers = L.geoJSON(path, {
+          style: {
+            "color": "#8C2752",
+            "weight": 2,
+            "opacity": 0.6
+          }
+      }).addTo(mapStore.current);
     }
   }}/>;
 }

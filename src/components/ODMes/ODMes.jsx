@@ -7,8 +7,14 @@ import './ODMes.css';
 
 export default function ODMes() {
     const [table, setTable] = useState([]);
+    const mapStore = useRef(null);
 
     useEffect(()=>{
+        pubsub.subscribe('outputLayers', (_, data)=>{
+            if(data.map){
+                mapStore.current = data.map;
+            }
+        });
         pubsub.subscribe('odMes', (_, data)=>{
             drawScatter('scatterBox', data.scatter);
             drawBarStatics('barBox', data.bar);
@@ -26,7 +32,7 @@ export default function ODMes() {
                 <section className='bar' id='barBox'></section>
             </section>
         </section>
-        <section className='mesTable' id='tabelBox'>{drawTable(table)}</section>
+        <section className='mesTable' id='tabelBox'>{drawTable(table, mapStore)}</section>
     </section>
   );
 }

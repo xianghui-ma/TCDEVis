@@ -1,10 +1,9 @@
-import {React, useEffect, useRef, useState} from 'react';
+import {React, useEffect, useState} from 'react';
 import {Divider, DatePicker, TimePicker, Slider, Select, Switch } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
 import pubsub from 'pubsub-js';
 
-import {initTravelInControlPanel, handleOdControlInput, initSelectTravelType, isShowOdLayer, getMapAndLayers} from './ControlPanel.js';
-import {travelColors, emissionRangeColors} from '../../color.config.js';
+import {initTravelInControlPanel, initSelectTravelType, isShowOdLayer, getMapAndLayers} from './ControlPanel.js';
+// import {travelColors, emissionRangeColors} from '../../color.config.js';
 
 import './ControlPanel.css';
 
