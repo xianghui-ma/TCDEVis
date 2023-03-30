@@ -41,7 +41,7 @@ export const drawScatter = (containerId, odData)=>{
   let chart = echarts.init(document.getElementById(containerId));
 
   chart.on('brushSelected', (params)=>{
-    console.log(params);
+    console.log(params.batch[0].selected);
   });
 
   chart.setOption({

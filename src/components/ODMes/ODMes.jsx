@@ -16,6 +16,7 @@ export default function ODMes() {
             }
         });
         pubsub.subscribe('odMes', (_, data)=>{
+            console.log(data);
             drawScatter('scatterBox', data.scatter);
             drawBarStatics('barBox', data.bar);
             drawTimeFrequency('timeBox', data.hot);
