@@ -4,6 +4,7 @@ import * as echarts from 'echarts';
 import L from 'leaflet';
 
 let pathLayers = null;
+let pathFromScatter = null;
 
 // 颜色配置
 const colors = {
@@ -20,8 +21,33 @@ const colors = {
   Other: '#b15928',
 }
 
+const mapScatterToPath = (selectedPoints, scatterPath, map)=>{
+  // console.log(selectedPoints, scatterPath, map);
+  let travelName = '';
+  let pointArr = null;
+  let targetArr = null;
+  let paths = [];
+  selectedPoints.forEach((points)=>{
+    if(points.dataIndex.length !== 0){
+      travelName = points.seriesName;
+      pointArr = points.dataIndex;
+      targetArr = scatterPath[travelName];
+      pointArr.forEach((item)=>{
+        paths.push(JSON.parse(targetArr[item]));
+      });
+    }
+  });
+  pathFromScatter = L.geoJSON(paths, {
+    style: {
+      "color": "#8C2752",
+      "weight": 2,
+      "opacity": 0.4
+    }
+  }).addTo(map);
+}
+
 // 绘制散点图
-export const drawScatter = (containerId, odData)=>{
+export const drawScatter = (containerId, odData, scatterPath, mapStore)=>{
   // 创建series和legend
   let series = [];
   let legendData = [];
@@ -39,9 +65,18 @@ export const drawScatter = (containerId, odData)=>{
   }
   // 开始绘制
   let chart = echarts.init(document.getElementById(containerId));
+  let selectedPoints = null;
 
   chart.on('brushSelected', (params)=>{
-    console.log(params.batch[0].selected);
+    selectedPoints = params.batch[0].selected;
+  });
+
+  chart.on('brushEnd', (params)=>{
+    if(params.areas.length === 0){
+      pathFromScatter && mapStore.current.removeLayer(pathFromScatter);
+    }else{
+      mapScatterToPath(selectedPoints, scatterPath, mapStore.current);
+    }
   });
 
   chart.setOption({
@@ -143,7 +178,7 @@ export const drawTable = (data, mapStore)=>{
   };
   return <Table columns={columns} dataSource={data} onChange={onChange} pagination={{hideOnSinglePage: true}} rowSelection={{
     type: 'checkbox',
-    onChange: (selectedRowKeys, selectedRows) => {
+    onChange: (_, selectedRows) => {
       let path = []
       pathLayers && mapStore.current.removeLayer(pathLayers);
       selectedRows.forEach((item)=>{
@@ -153,7 +188,7 @@ export const drawTable = (data, mapStore)=>{
           style: {
             "color": "#8C2752",
             "weight": 2,
-            "opacity": 0.6
+            "opacity": 0.4
           }
       }).addTo(mapStore.current);
     }

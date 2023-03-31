@@ -2,7 +2,7 @@ import {React, useEffect, useState} from 'react';
 import {Divider, DatePicker, TimePicker, Slider, Select, Switch } from 'antd';
 import pubsub from 'pubsub-js';
 
-import {initTravelInControlPanel, initSelectTravelType, isShowOdLayer, getMapAndLayers} from './ControlPanel.js';
+import {initTravelInControlPanel, initSelectTravelType, isShowOdLayer, getMapAndLayers, getTravelType} from './ControlPanel.js';
 // import {travelColors, emissionRangeColors} from '../../color.config.js';
 
 import './ControlPanel.css';
@@ -32,7 +32,7 @@ export default function ControlPanel() {
           <Select
             defaultValue="Traffic"
             style={{ width: '100%', marginTop: '6%', marginBottom: '6%'}}
-            // onChange={handleChange}
+            onChange={getTravelType}
             options={initSelectTravelType()}
           />
           <p>OD Heatmap Accuracy:</p>

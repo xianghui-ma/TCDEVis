@@ -44,11 +44,13 @@ export const initTravelInControlPanel = ()=>{
         }</section>
     </section>
 }
+
 export const handleOdControlInput = (store)=>{
     return (accuracyValue)=>{
         store.current = accuracyValue;
     }
 }
+
 export const initSelectTravelType = ()=>{
     const travelType = ['Traffic', 'Dining', 'Pastime', 'Hotel', 'Work', 'Other', 'Shop', 'Service', 'Medical', 'Home', 'School'];
     return travelType.map((item)=>{
@@ -57,4 +59,9 @@ export const initSelectTravelType = ()=>{
             label: item
         }
     });
+}
+
+// 获取所选的travel类型
+export const getTravelType = (data)=>{
+    console.log(data);
 }
