@@ -214,6 +214,14 @@ export const drawBarStatics = (containerId, barData)=>{
       top: 0,
       bottom: 0
     },
+    title: {
+      text: 'Number of travel',
+      textStyle: {
+        fontWeight: 600,
+        fontSize: 12,
+        color: '#000',
+      }
+    },
     xAxis: {
       type: 'category',
       show: false
@@ -251,7 +259,7 @@ export const drawTimeFrequency = (containerId, data)=>{
     .attr('height', height);
   // 开始绘制24个正方形
   const squares = canvas.append('g')
-    .attr("transform", `translate(20, 0)`)
+    .attr("transform", `translate(20, 20)`)
     .selectAll('rect')
     .data(data)
     .enter()
@@ -273,14 +281,14 @@ export const drawTimeFrequency = (containerId, data)=>{
   const axisGenerator = d3.axisBottom(textScale)
     .ticks(12);
   canvas.append("g")
-    .attr("transform", "translate(20, 20)")
+    .attr("transform", "translate(20, 40)")
     .call(axisGenerator);
   // 添加title
   canvas.append("text")
-    .attr("x", width - 140)
-    .attr("y", height - 10)
+    .attr("x", 5)
+    .attr("y", height - 50)
     .text("Time Heatmap")
-    .attr("font-size", "16px")
+    .attr("font-size", "12px")
     .attr("fill", "#000")
     .attr('font-weight', 600);
 }
