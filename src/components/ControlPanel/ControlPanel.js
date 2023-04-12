@@ -1,3 +1,5 @@
+import pubsub from 'pubsub-js';
+
 // 存放地图图层信息
 const layersMes = {
     map: null,
@@ -63,5 +65,5 @@ export const initSelectTravelType = ()=>{
 
 // 获取所选的travel类型
 export const getTravelType = (data)=>{
-    console.log(data);
+    pubsub.publish('travelType', data);
 }

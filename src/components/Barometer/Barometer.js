@@ -8,7 +8,7 @@ export const initChart = async (store)=>{
     data = data.data;
     store.current = {};
     const idArr = ['speed', 'distance', 'time', 'co2'];
-    const titleArr = ['Speed(m/s)', 'Distance(km)', 'Time(h)', 'CO2(T)'];
+    const titleArr = ['Speed(m/s)', 'Distance(km)', 'Time(h)', 'CO2(kg)'];
     let chart = null;
     idArr.forEach((item, index)=>{
         chart = echarts.init(document.getElementById(item));

@@ -145,6 +145,13 @@ export const drawTable = (data, mapStore)=>{
       dataIndex: 'purpose',
     },
     {
+      title: 'CO2',
+      dataIndex: 'co2',
+      sorter: {
+        compare: (a, b) => a.co2 - b.co2,
+      },
+    },
+    {
       title: 'Average Speed',
       dataIndex: 'speed',
       sorter: {
@@ -163,13 +170,6 @@ export const drawTable = (data, mapStore)=>{
       dataIndex: 'distance',
       sorter: {
         compare: (a, b) => a.distance - b.distance,
-      },
-    },
-    {
-      title: 'CO2',
-      dataIndex: 'co2',
-      sorter: {
-        compare: (a, b) => a.co2 - b.co2,
       },
     }
   ];
@@ -242,7 +242,7 @@ export const drawBarStatics = (containerId, barData)=>{
 // 绘制时间频率热力图
 export const drawTimeFrequency = (containerId, data)=>{
   // 定义刻度文本
-  const text = ['01', '03', '05', '07', '08', '11', '13', '15', '17', '19', '21', '23'];
+  const text = ['01', '03', '05', '07', '09', '11', '13', '15', '17', '19', '21', '23'];
   // 定义容器宽高
   const width = 480;
   const height = 66;

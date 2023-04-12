@@ -18,7 +18,7 @@ export default function Barometer() {
         <Button icon={<ArrowsAltOutlined />} size='small' style={{marginLeft: '10em', height: '20px', width: '20px'}} onClick={modelToggle('speed', 'Speed(m/s)', statusStore)}/>
         <Button icon={<ArrowsAltOutlined />} size='small' style={{marginLeft: '10em', height: '20px', width: '20px'}} onClick={modelToggle('distance', 'Distance(km)', statusStore)}/>
         <Button icon={<ArrowsAltOutlined />} size='small' style={{marginLeft: '5em', height: '20px', width: '20px'}} onClick={modelToggle('time', 'Time(h)', statusStore)}/>
-        <Button icon={<ArrowsAltOutlined />} size='small' style={{marginLeft: '5em', height: '20px', width: '20px'}} onClick={modelToggle('co2', 'CO2(T)', statusStore)}/>
+        <Button icon={<ArrowsAltOutlined />} size='small' style={{marginLeft: '5em', height: '20px', width: '20px'}} onClick={modelToggle('co2', 'CO2(kg)', statusStore)}/>
       </section>
       <section className='chartBox'>
         <section id='speed' className='speedBox'></section>

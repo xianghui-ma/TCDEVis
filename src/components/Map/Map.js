@@ -6,6 +6,7 @@ import pubsub from 'pubsub-js';
 
 let selectedAreaArray = [];
 let selectedAreaJson = [];
+let shareMap = null;
 
 // 清除选取图层
 const clearSelectedAreaLayer = (map)=>{
@@ -106,6 +107,7 @@ export const loadMap = (containerId)=>{
     addSearchButton(map);
     loadHeatmap(map);
     pubsub.publish('outputLayers', {map});
+    shareMap = map;
 }
 
 // 加载OD热力图
@@ -125,4 +127,23 @@ const loadHeatmap = async (map)=>{
         }
     }).addTo(map);
     pubsub.publish('outputLayers', {odHeatmapLayer});
+}
+
+// 加载不同出行类型的轨迹
+export const loadSingleTravel = (_, travelType)=>{
+    axios({
+        method: 'post',
+        url: 'http://localhost:5000/typeSearch',
+        data: {
+            type: travelType
+        }
+    }).then((response)=>{
+        L.geoJSON(response.data.path, {
+            style: {
+                "color": "#8C2752",
+                "weight": 2,
+                "opacity": 0.1
+            }
+        }).addTo(shareMap);
+    });
 }
