@@ -9,7 +9,7 @@ let pathFromScatter = null;
 // 颜色配置
 const colors = {
   Traffic: '#a6cee3',
-  Hotel: '#1f78b4',
+  Hotel: '#385723',
   Pastime: '#b2df8a',
   School: '#33a02c',
   Shop: '#fb9a99',
@@ -109,12 +109,12 @@ export const drawScatter = (containerId, odData, scatterPath, mapStore)=>{
         }
       }
     },
-    legend: {
-      data: legendData,
-      orient: 'vertical',
-      right: 2,
-      top: 30
-    },
+    // legend: {
+    //   data: legendData,
+    //   orient: 'vertical',
+    //   right: 2,
+    //   top: 30
+    // },
     brush: {},
     series
   }, true);
@@ -136,10 +136,10 @@ export const drawTable = (data, mapStore)=>{
   //   }
   // ];
   let columns = [
-    {
-      title: 'Trajectory ID',
-      dataIndex: 'trajectory',
-    },
+    // {
+    //   title: 'Trajectory ID',
+    //   dataIndex: 'trajectory',
+    // },
     {
       title: 'Trip Purposes',
       dataIndex: 'purpose',

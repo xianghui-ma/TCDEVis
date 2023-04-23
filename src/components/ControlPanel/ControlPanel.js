@@ -22,7 +22,8 @@ export const initTravelInControlPanel = ()=>{
     const rightCol = ['Shop', 'Service', 'Medical', 'Home', 'School'];
     const colors = {
         Traffic: '#a6cee3',
-        Hotel: '#1f78b4',
+        // Hotel: '#1f78b4',
+        Hotel: '#385723',
         Pastime: '#b2df8a',
         School: '#33a02c',
         Shop: '#fb9a99',

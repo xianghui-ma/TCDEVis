@@ -52,7 +52,7 @@ const drawFrequencyOfTravel = (width, g, data)=>{
     // 定义线性比例尺
     let linearScale = d3.scaleLinear()
         .domain([0, d3.max(data)])
-        .range([INNERRADIUS, width / 2])
+        .range([INNERRADIUS, (width - 18) / 2])
 
     // 添加组元素g，包裹出行频次柱状图
     let frequencyBarG = g.append('g');

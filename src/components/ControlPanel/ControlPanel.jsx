@@ -16,32 +16,32 @@ export default function ControlPanel() {
   return (
     <section className='controlPanel'>
       <section className='dateBox'>
-        <Divider style={{color: '#777', borderColor: '#777'}}>Select Date</Divider>
+        <Divider style={{color: '#777', borderColor: '#777', marginTop: '0.5em', marginBottom: '0.5em'}}>Select Date</Divider>
         <DatePicker size='middle' style={{width: '100%'}}/>
       </section>
       <section className='hourBox'>
-        <Divider style={{color: '#777', borderColor: '#777'}}>Select Time</Divider>
+        <Divider style={{color: '#777', borderColor: '#777', marginTop: '0.5em', marginBottom: '0.5em'}}>Select Time</Divider>
         <TimePicker.RangePicker format='HH' style={{width: '100%'}}/>
       </section>
       <section className='odHeatmap'>
-        <Divider style={{color: '#777', borderColor: '#777'}}>OD Heatmap</Divider>
+        <Divider style={{color: '#777', borderColor: '#777', marginTop: '0.5em', marginBottom: '0.5em'}}>OD Heatmap</Divider>
         <section className='heatmapControl'>
           <p>Show/Hidden Layer:</p>
-          <Switch checkedChildren="Hidden" unCheckedChildren="Show" defaultChecked style={{ width: '100%', marginTop: '6%', marginBottom: '6%'}} onChange={isShowOdLayer}/>
+          <Switch checkedChildren="Hidden" unCheckedChildren="Show" defaultChecked style={{ width: '100%', marginTop: '5%', marginBottom: '5%'}} onChange={isShowOdLayer}/>
           <p>Select Travel Type:</p>
           <Select
             defaultValue="Traffic"
-            style={{ width: '100%', marginTop: '6%', marginBottom: '6%'}}
+            style={{ width: '100%', marginTop: '5%', marginBottom: '5%'}}
             onChange={getTravelType}
             options={initSelectTravelType()}
           />
           <p>OD Heatmap Accuracy:</p>
           <Slider max={500} min={50} onChange={setHeatmapAccuracy} step={50} value={heatmapAccuracy} />
-          <p>Display Range:</p>
-          <Slider range defaultValue={[20, 169]} max={169} min={1}/>
+          {/* <p>Display Range:</p>
+          <Slider range defaultValue={[20, 169]} max={169} min={1}/> */}
         </section>
       </section>
-      <section className='settingTraj'>
+      {/* <section className='settingTraj'>
         <Divider style={{color: '#777', borderColor: '#777'}}>CO2 Trajectory</Divider>
         <p>
           <span className='textDescLow'></span>
@@ -58,7 +58,7 @@ export default function ControlPanel() {
           <span className='textDesc'>300-400</span>
           <Switch checkedChildren="Hidden" unCheckedChildren="Show" defaultChecked/>
         </p>
-      </section>
+      </section> */}
       <section className='travelBox'>
         <Divider style={{color: '#777', borderColor: '#777'}}>Travel Colors</Divider>
         <section className='travelList'>
